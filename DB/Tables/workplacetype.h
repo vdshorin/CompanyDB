@@ -1,0 +1,33 @@
+#ifndef WORKPLACETYPE_H
+#define WORKPLACETYPE_H
+
+#include <QObject>
+#include "instruments.h"
+
+class WorkplaceType : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(int id READ getId WRITE setId NOTIFY idChanged);
+    Q_PROPERTY(QString value READ getValue WRITE setValue NOTIFY idChanged);
+
+public:
+    explicit WorkplaceType(QObject *parent = nullptr);
+    WorkplaceType(int _id, QString _value):
+        id(_id), value(_value){}
+    int getId() const;
+    void setId(int value);
+
+    QString getValue() const;
+    void setValue(const QString &value);
+
+    void Print();
+private:
+    int id;
+    QString value;
+
+signals:
+    void idChanged();
+    void valueChanged();
+};
+
+#endif // WORKPLACETYPE_H
