@@ -10,6 +10,13 @@ Rectangle{
 
     property var currentActivButton
 
+    property int enterIndex: 0
+    property int exitIndex: 0
+
+    property color prevNavBtn: "black"
+    property color defaultNavBtn: "yellow"
+    property color currentNavBtn: "red"
+
     property var listContacts: test.listQML
 
     property var mapContacts: []
@@ -24,23 +31,25 @@ Rectangle{
 
         Row{
             anchors.fill: parent
+            spacing: 5
 
             Repeater{
                 id: repeaterButtons
                 model: 4
 
+
                 Rectangle{
                     id: navBtn
                     border.width: 1
-                    color: yellow
+                    color: defaultNavBtn
                     height: parent.height
                     width: parent.height
-
 
                     function setActivButton()
                     {
 //                        console.log("width: ", width);
-                        currentActivButton.color = "red";
+                        currentActivButton.color = currentNavBtn;
+                        prevNavBtn = currentActivButton.color;
                     }
 
                     function setNoActivButton()
@@ -54,6 +63,8 @@ Rectangle{
                         hoverEnabled: true
 
                         onClicked: {
+                            console.log("defaultNavBtn: " + defaultNavBtn);
+                            console.log("currentNavBtn: " + currentNavBtn);
                             navBtnClicked(index)
 
                             console.log("navButton" , index);
@@ -68,6 +79,15 @@ Rectangle{
                             }
 
     //                        var y = test.getMapListHuman(listContacts);
+                        }
+
+                        onEntered: {
+                            navBtn.color = Qt.lighter(navBtn.color)
+                        }
+
+                        onExited: {
+                            navBtn.color = repeaterButtons.itemAt(index) === currentActivButton
+                                    ? currentNavBtn : defaultNavBtn
                         }
                     }
                 }

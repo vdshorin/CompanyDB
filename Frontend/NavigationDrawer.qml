@@ -3,19 +3,23 @@ import QtQuick.Controls 2.15
 import QtQuick.Window 2.15
 
 Rectangle {
-    id: navigationDrawer
-    width: parent.width / 5
+    id: root
+//    width: parent.width / coefReduced
     height: parent.height
     color: Qt.darker("gray")
 
     property var listNames: ["Весь", "Постоянный", "Переменный"]
     property string yellow: "#eaff0d"
 
-    Column{
+    property int coefReduced: 15
+    property int coefExpanded: 5
+
+    state: mouseAreaHover.hovered ? "expanded" : "reduced"
+
+    Column {
         id: columnNav
         anchors.top: parent.top
         width: parent.width
-        //        height: 100
         spacing: 5
 
         Text {
@@ -31,7 +35,7 @@ Rectangle {
         }
 
         Repeater{
-            model: 4
+            model: listNames.length
 
             Structure {
 
@@ -41,8 +45,6 @@ Rectangle {
         Separator{
         }
     }
-
-
 
     Rectangle{
         id: idProfile
@@ -64,6 +66,53 @@ Rectangle {
         id: navButton
         anchors.bottom: idProfile.top
     }
+
+    HoverHandler {
+        id: mouseAreaHover
+        acceptedDevices: PointerDevice.AllDevices
+        target: root
+    }
+
+    states: [
+        State {
+            name: "reduced"
+
+            PropertyChanges {
+                target: root;
+                width: root.parent.width / coefReduced;
+            }
+        },
+
+        State {
+            name: "expanded"
+
+            PropertyChanges {
+                target: root;
+                width: root.parent.width / coefExpanded;
+            }
+        }
+
+    ]
+
+    transitions: [
+        Transition {
+            from: "reduced"
+            to: "expanded"
+            NumberAnimation {
+                duration: 200;
+                properties: "width"
+            }
+        },
+
+        Transition {
+            from: "expanded"
+            to: "reduced"
+            NumberAnimation {
+                duration: 200;
+                properties: "width"
+            }
+        }
+    ]
 }
 
 /*##^##
