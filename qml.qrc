@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>Resources/db.jpg</file>
+        <file>Resources/users.png</file>
+        <file>Resources/document.png</file>
     </qresource>
 </RCC>

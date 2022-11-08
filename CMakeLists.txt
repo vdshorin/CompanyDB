@@ -76,12 +76,16 @@ set (SOURCES
 set (QML_FILES
     main.qml
     Frontend/AppHeader.qml
-    Frontend/NavButton.qml
-    Frontend/NavigationDrawer.qml
     Frontend/personnel.qml
-    Frontend/Separator.qml
-    Frontend/Structure.qml
     Frontend/Table.qml
+    Frontend/Flasher.qml
+    Frontend/TestDrag.qml
+
+    #   Navigation Panel
+    Frontend/NavigationPanel/NavButton.qml
+    Frontend/NavigationPanel/NavigationDrawer.qml
+    Frontend/NavigationPanel/Separator.qml
+    Frontend/NavigationPanel/Structure.qml
 )
 
 set (RESOURCES

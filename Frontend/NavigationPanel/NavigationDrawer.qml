@@ -90,6 +90,8 @@ Rectangle {
                 target: root;
                 width: root.parent.width / coefExpanded;
             }
+
+
         }
 
     ]

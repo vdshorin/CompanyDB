@@ -47,6 +47,8 @@ ApplicationWindow {
     title: qsTr("Hello World")
     color: Qt.lighter("blue")
 
+//    TestDrag {}
+
     AppHeader {
         id: appHeader
         anchors.left: parent.left
